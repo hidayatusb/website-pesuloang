@@ -1,0 +1,64 @@
+.rich-editor-container .ck.ck-editor {
+    width: 100%;
+}
+
+.rich-editor-container .ck-editor__editable {
+    min-height: var(--rich-editor-min-height, 220px);
+}
+
+.rich-editor-container .ck.ck-toolbar {
+    border-radius: 0.5rem 0.5rem 0 0;
+    border-color: var(--border, #e5e7eb);
+    background: var(--background, #fff);
+}
+
+.rich-editor-container .ck.ck-editor__main > .ck-editor__editable {
+    border-radius: 0 0 0.5rem 0.5rem;
+    border-color: var(--border, #e5e7eb);
+    background: var(--background, #fff);
+}
+
+.rich-editor-container .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused {
+    border-color: var(--primary, #4f46e5);
+    box-shadow: none;
+}
+
+/* Metronic/Tailwind reset sets list-style:none & padding:0 on all ul/ol */
+.rich-editor-container .ck-editor__editable.ck-content ul,
+.rich-editor-container .ck-editor__editable.ck-content ol {
+    padding-inline-start: 2.5em;
+    margin-block: 0.5em;
+}
+
+.rich-editor-container .ck-editor__editable.ck-content ul {
+    list-style-type: disc;
+}
+
+.rich-editor-container .ck-editor__editable.ck-content ol {
+    list-style-type: decimal;
+}
+
+.rich-editor-container .ck-editor__editable.ck-content ul ul {
+    list-style-type: circle;
+}
+
+.rich-editor-container .ck-editor__editable.ck-content ul ul ul {
+    list-style-type: square;
+}
+
+.rich-editor-container .ck-editor__editable.ck-content ol ol {
+    list-style-type: lower-latin;
+}
+
+.rich-editor-container .ck-editor__editable.ck-content ol ol ol {
+    list-style-type: lower-roman;
+}
+
+.rich-editor-container .ck-editor__editable.ck-content li {
+    display: list-item;
+    list-style-position: outside;
+}
+
+.rich-editor-container .ck-editor__editable.ck-content li > p {
+    margin-block: 0;
+}
