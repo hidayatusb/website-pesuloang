@@ -38,10 +38,32 @@
                     @if ($activeCategory)
                         @php $columns = $activeCategory->columnDefinitions(); @endphp
                         <div class="mb-6 border-b border-gray-100 pb-5">
-                            <h2 class="text-xl font-bold text-gray-900">{{ $activeCategory->name }}</h2>
-                            @if ($activeCategory->description)
-                                <p class="mt-2 text-sm leading-relaxed text-gray-600">{{ $activeCategory->description }}</p>
-                            @endif
+                            <div class="flex flex-wrap items-start justify-between gap-4">
+                                <div>
+                                    <h2 class="text-xl font-bold text-gray-900">{{ $activeCategory->name }}</h2>
+                                    @if ($activeCategory->description)
+                                        <p class="mt-2 text-sm leading-relaxed text-gray-600">{{ $activeCategory->description }}</p>
+                                    @endif
+                                </div>
+                                <div class="flex shrink-0 items-center gap-2">
+                                    <a href="{{ route('statistika.export', ['format' => 'pdf', 'kategori' => $activeCategory->slug]) }}"
+                                        class="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-semibold text-gray-700 shadow-sm transition hover:border-desa-300 hover:text-desa-600">
+                                        <i class="ki-filled ki-file-down text-sm"></i>
+                                        PDF
+                                    </a>
+                                    <a href="{{ route('statistika.export', ['format' => 'excel', 'kategori' => $activeCategory->slug]) }}"
+                                        class="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-semibold text-gray-700 shadow-sm transition hover:border-desa-300 hover:text-desa-600">
+                                        <i class="ki-filled ki-file-down text-sm"></i>
+                                        Excel
+                                    </a>
+                                    <a href="{{ route('statistika.export', ['format' => 'excel']) }}"
+                                        class="inline-flex items-center gap-1.5 rounded-lg bg-desa-600 px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-desa-700"
+                                        title="Unduh seluruh kategori dalam satu file Excel">
+                                        <i class="ki-filled ki-folder-down text-sm"></i>
+                                        Semua Data
+                                    </a>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="overflow-x-auto rounded-xl border border-gray-200">

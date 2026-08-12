@@ -4,7 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\VillagePostController;
 use App\Http\Controllers\Admin\VillageServiceController;
 use App\Http\Controllers\Admin\VillageUmkmController;
+use App\Http\Controllers\Admin\VillageDocumentController;
+use App\Http\Controllers\Admin\VillageInfographicController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InfographicController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StatisticController;
@@ -15,9 +19,14 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/berita', [PostController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [PostController::class, 'show'])->name('berita.show');
 Route::get('/statistika', [StatisticController::class, 'index'])->name('statistika.index');
+Route::get('/statistika/unduh/{format}', [StatisticController::class, 'export'])
+    ->whereIn('format', ['pdf', 'excel'])
+    ->name('statistika.export');
 Route::get('/umkm', [UmkmController::class, 'index'])->name('umkm.index');
 Route::get('/umkm/{slug}', [UmkmController::class, 'show'])->name('umkm.show');
 Route::get('/layanan', [ServiceController::class, 'index'])->name('layanan.index');
+Route::get('/infografis', [InfographicController::class, 'index'])->name('infografis.index');
+Route::get('/dokumen', [DocumentController::class, 'index'])->name('dokumen.index');
 Route::get('/layanan/{slug}', [ServiceController::class, 'show'])->name('layanan.show');
 
 Route::middleware(['auth'])->group(function () {
@@ -39,6 +48,16 @@ Route::middleware(['auth'])->group(function () {
     Route::livewire('/dashboard/desa/layanan/{service}/edit', 'pages::desa.layanan.form')->name('desa.layanan.edit');
     Route::patch('/dashboard/desa/layanan/{service}/toggle', [VillageServiceController::class, 'toggle'])->name('desa.layanan.toggle');
     Route::delete('/dashboard/desa/layanan/{service}', [VillageServiceController::class, 'destroy'])->name('desa.layanan.destroy');
+    Route::livewire('/dashboard/desa/infografis', 'pages::desa.infografis.index')->name('desa.infografis.index');
+    Route::livewire('/dashboard/desa/infografis/tambah', 'pages::desa.infografis.form')->name('desa.infografis.create');
+    Route::livewire('/dashboard/desa/infografis/{infographic}/edit', 'pages::desa.infografis.form')->name('desa.infografis.edit');
+    Route::patch('/dashboard/desa/infografis/{infographic}/toggle', [VillageInfographicController::class, 'toggle'])->name('desa.infografis.toggle');
+    Route::delete('/dashboard/desa/infografis/{infographic}', [VillageInfographicController::class, 'destroy'])->name('desa.infografis.destroy');
+    Route::livewire('/dashboard/desa/dokumen', 'pages::desa.dokumen.index')->name('desa.dokumen.index');
+    Route::livewire('/dashboard/desa/dokumen/tambah', 'pages::desa.dokumen.form')->name('desa.dokumen.create');
+    Route::livewire('/dashboard/desa/dokumen/{document}/edit', 'pages::desa.dokumen.form')->name('desa.dokumen.edit');
+    Route::patch('/dashboard/desa/dokumen/{document}/toggle', [VillageDocumentController::class, 'toggle'])->name('desa.dokumen.toggle');
+    Route::delete('/dashboard/desa/dokumen/{document}', [VillageDocumentController::class, 'destroy'])->name('desa.dokumen.destroy');
 });
 
 Route::middleware(['guest'])->group(function () {

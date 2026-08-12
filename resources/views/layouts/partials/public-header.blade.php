@@ -7,6 +7,8 @@
     $isStatistika = request()->routeIs('statistika.*');
     $isUmkm = request()->routeIs('umkm.*');
     $isLayanan = request()->routeIs('layanan.*');
+    $isInfografis = request()->routeIs('infografis.*');
+    $isDokumen = request()->routeIs('dokumen.*');
 @endphp
 
 <header class="sticky top-0 z-50 bg-white shadow-sm">
@@ -44,21 +46,25 @@
                 class="text-sm font-medium transition {{ $isLayanan ? 'border-b-2 border-desa-600 pb-0.5 text-desa-600' : 'text-gray-600 hover:text-desa-600' }}">
                 Layanan
             </a>
+            <a href="{{ route('infografis.index') }}"
+                class="text-sm font-medium transition {{ $isInfografis ? 'border-b-2 border-desa-600 pb-0.5 text-desa-600' : 'text-gray-600 hover:text-desa-600' }}">
+                Infografis
+            </a>
+            <a href="{{ route('dokumen.index') }}"
+                class="text-sm font-medium transition {{ $isDokumen ? 'border-b-2 border-desa-600 pb-0.5 text-desa-600' : 'text-gray-600 hover:text-desa-600' }}">
+                Dokumen
+            </a>
             <a href="{{ $nav('#galeri') }}"
                 class="text-sm font-medium text-gray-600 transition hover:text-desa-600">
                 Galeri
             </a>
-            <a href="{{ $nav('#kontak') }}"
-                class="text-sm font-medium text-gray-600 transition hover:text-desa-600">
-                Kontak
-            </a>
+           
         </nav>
 
         <div class="flex items-center gap-3">
-            <a href="{{ route('login') }}"
-                class="hidden items-center gap-2 rounded-lg bg-desa-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-desa-700 sm:inline-flex">
-                <i class="ki-filled ki-notification-on text-base"></i>
-                Masuk
+            <a href="{{ route('login') }}" title="Masuk" aria-label="Masuk"
+                class="hidden size-10 items-center justify-center rounded-lg bg-desa-600 text-white transition hover:bg-desa-700 sm:inline-flex">
+                <i class="ki-filled ki-key text-lg"></i>
             </a>
             <button type="button" onclick="toggleMobileMenu()"
                 class="inline-flex size-10 items-center justify-center rounded-lg border border-gray-200 text-gray-600 lg:hidden"
@@ -90,6 +96,14 @@
             <a href="{{ route('layanan.index') }}"
                 class="rounded-lg px-3 py-2 text-sm {{ $isLayanan ? 'bg-desa-50 font-medium text-desa-600' : 'text-gray-600 hover:bg-gray-50' }}">
                 Layanan
+            </a>
+            <a href="{{ route('infografis.index') }}"
+                class="rounded-lg px-3 py-2 text-sm {{ $isInfografis ? 'bg-desa-50 font-medium text-desa-600' : 'text-gray-600 hover:bg-gray-50' }}">
+                Infografis
+            </a>
+            <a href="{{ route('dokumen.index') }}"
+                class="rounded-lg px-3 py-2 text-sm {{ $isDokumen ? 'bg-desa-50 font-medium text-desa-600' : 'text-gray-600 hover:bg-gray-50' }}">
+                Dokumen
             </a>
             <a href="{{ $nav('#galeri') }}" class="rounded-lg px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">Galeri</a>
             <a href="{{ $nav('#kontak') }}" class="rounded-lg px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">Kontak</a>

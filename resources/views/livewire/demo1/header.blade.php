@@ -20,13 +20,12 @@
             </div>
         </div>
         <!-- End of Mobile Logo -->
-        <livewire:shared.mega-menu />
+        <div class="flex items-center gap-2.5">
+    
+        </div>
         <!-- Topbar -->
         <div class="flex items-center gap-2.5">
-            <livewire:shared.topbar-search-modal />
-            <livewire:shared.topbar-notification-dropdown />
-            <livewire:shared.topbar-chat />
-            <livewire:shared.topbar-apps />
+    
             <livewire:shared.topbar-user-dropdown />
         </div>
         <!-- End of Topbar -->
