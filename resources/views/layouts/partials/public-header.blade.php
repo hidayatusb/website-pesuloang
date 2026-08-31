@@ -9,6 +9,7 @@
     $isLayanan = request()->routeIs('layanan.*');
     $isInfografis = request()->routeIs('infografis.*');
     $isDokumen = request()->routeIs('dokumen.*');
+    $isGaleri = request()->routeIs('galeri.*');
 @endphp
 
 <header class="sticky top-0 z-50 bg-white shadow-sm">
@@ -26,14 +27,7 @@
                 class="text-sm font-medium transition {{ $isHome ? 'border-b-2 border-desa-600 pb-0.5 text-desa-600' : 'text-gray-600 hover:text-desa-600' }}">
                 Beranda
             </a>
-            <a href="{{ $nav('#profil') }}"
-                class="text-sm font-medium text-gray-600 transition hover:text-desa-600">
-                Profil Desa
-            </a>
-            <a href="{{ $nav('#informasi') }}"
-                class="text-sm font-medium transition {{ $isBerita ? 'border-b-2 border-desa-600 pb-0.5 text-desa-600' : 'text-gray-600 hover:text-desa-600' }}">
-                Informasi
-            </a>
+          
             <a href="{{ route('statistika.index') }}"
                 class="text-sm font-medium transition {{ $isStatistika ? 'border-b-2 border-desa-600 pb-0.5 text-desa-600' : 'text-gray-600 hover:text-desa-600' }}">
                 Statistika
@@ -54,8 +48,8 @@
                 class="text-sm font-medium transition {{ $isDokumen ? 'border-b-2 border-desa-600 pb-0.5 text-desa-600' : 'text-gray-600 hover:text-desa-600' }}">
                 Dokumen
             </a>
-            <a href="{{ $nav('#galeri') }}"
-                class="text-sm font-medium text-gray-600 transition hover:text-desa-600">
+            <a href="{{ route('galeri.index') }}"
+                class="text-sm font-medium transition {{ $isGaleri ? 'border-b-2 border-desa-600 pb-0.5 text-desa-600' : 'text-gray-600 hover:text-desa-600' }}">
                 Galeri
             </a>
            
@@ -80,11 +74,7 @@
                 class="rounded-lg px-3 py-2 text-sm font-medium {{ $isHome ? 'bg-desa-50 text-desa-600' : 'text-gray-600 hover:bg-gray-50' }}">
                 Beranda
             </a>
-            <a href="{{ $nav('#profil') }}" class="rounded-lg px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">Profil Desa</a>
-            <a href="{{ $nav('#informasi') }}"
-                class="rounded-lg px-3 py-2 text-sm {{ $isBerita ? 'bg-desa-50 font-medium text-desa-600' : 'text-gray-600 hover:bg-gray-50' }}">
-                Informasi
-            </a>
+         
             <a href="{{ route('statistika.index') }}"
                 class="rounded-lg px-3 py-2 text-sm {{ $isStatistika ? 'bg-desa-50 font-medium text-desa-600' : 'text-gray-600 hover:bg-gray-50' }}">
                 Statistika
@@ -105,12 +95,15 @@
                 class="rounded-lg px-3 py-2 text-sm {{ $isDokumen ? 'bg-desa-50 font-medium text-desa-600' : 'text-gray-600 hover:bg-gray-50' }}">
                 Dokumen
             </a>
-            <a href="{{ $nav('#galeri') }}" class="rounded-lg px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">Galeri</a>
+            <a href="{{ route('galeri.index') }}"
+                class="rounded-lg px-3 py-2 text-sm {{ $isGaleri ? 'bg-desa-50 font-medium text-desa-600' : 'text-gray-600 hover:bg-gray-50' }}">
+                Galeri
+            </a>
             <a href="{{ $nav('#kontak') }}" class="rounded-lg px-3 py-2 text-sm text-gray-600 hover:bg-gray-50">Kontak</a>
-            <a href="{{ $nav('#kontak') }}"
+            <a href="{{ route('login') }}"
                 class="mt-2 flex items-center justify-center gap-2 rounded-lg bg-desa-600 px-4 py-2.5 text-sm font-medium text-white">
-                <i class="ki-filled ki-notification-on"></i>
-                Pengaduan
+                <i class="ki-filled ki-key text-lg"></i>
+                Masuk
             </a>
         </div>
     </nav>

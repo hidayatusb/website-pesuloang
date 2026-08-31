@@ -187,7 +187,7 @@ new #[Layout('layouts::demo1.base')] class extends Component {
                                 @endif
                             </div>
                             <div class="flex flex-col gap-2">
-                                <input type="file" wire:model="logo" accept="image/*" class="text-sm" />
+                                <input type="file" wire:model="logo" accept="image/*" class="text-sm kt-input" />
                                 <p class="text-xs text-muted-foreground">PNG/JPG, maks. 2MB. Tampil di navbar & footer website.</p>
                                 @if ($current_logo_path)
                                     <button type="button" wire:click="removeLogo" class="kt-btn kt-btn-sm kt-btn-outline w-fit">
@@ -225,7 +225,7 @@ new #[Layout('layouts::demo1.base')] class extends Component {
 
                     <div class="kt-form-item lg:col-span-2">
                         <label class="kt-form-label">Tagline / Visi Singkat</label>
-                        <textarea class="kt-input w-full min-h-[80px]" wire:model="tagline" rows="3"></textarea>
+                        <textarea class="kt-textarea w-full" wire:model="tagline" rows="3"></textarea>
                         @error('tagline') <div class="kt-form-message">{{ $message }}</div> @enderror
                     </div>
                 </div>
@@ -241,12 +241,12 @@ new #[Layout('layouts::demo1.base')] class extends Component {
                         <label class="kt-form-label">Gambar Hero (Banner Utama)</label>
                         <div class="grid gap-3">
                             @if ($hero_image)
-                                <img src="{{ $hero_image->temporaryUrl() }}" alt="Preview hero" class="max-h-40 w-full rounded-lg object-cover" />
+                                <img src="{{ $hero_image->temporaryUrl() }}" width="200" alt="Preview hero" class=" w-full rounded-lg object-cover" />
                             @elseif ($this->previewUrl($current_hero_image_path))
-                                <img src="{{ $this->previewUrl($current_hero_image_path) }}" alt="Hero saat ini" class="max-h-40 w-full rounded-lg object-cover" />
+                                <img src="{{ $this->previewUrl($current_hero_image_path) }}" width="200" alt="Hero saat ini" class=" w-full rounded-lg object-cover" />
                             @endif
-                            <input type="file" wire:model="hero_image" accept="image/*" class="text-sm" />
-                            <p class="text-xs text-muted-foreground">PNG/JPG, maks. 5MB. Statistik desa dikelola di menu Statistika Desa.</p>
+                            <input type="file" wire:model="hero_image" accept="image/*" class="text-sm kt-input" />
+                            <p class="text-xs text-muted-foreground">PNG/JPG, maks. 5MB.</p>
                         </div>
                         @error('hero_image') <div class="kt-form-message">{{ $message }}</div> @enderror
                     </div>
@@ -273,7 +273,7 @@ new #[Layout('layouts::demo1.base')] class extends Component {
 
                     <div class="kt-form-item lg:col-span-2">
                         <label class="kt-form-label">Deskripsi</label>
-                        <textarea class="kt-input w-full min-h-[120px]" wire:model="about_description" rows="5"></textarea>
+                        <textarea class="kt-textarea w-full" wire:model="about_description" rows="5"></textarea>
                         @error('about_description') <div class="kt-form-message">{{ $message }}</div> @enderror
                     </div>
 
@@ -301,7 +301,7 @@ new #[Layout('layouts::demo1.base')] class extends Component {
                 <div class="kt-card-content grid gap-5 lg:grid-cols-2">
                     <div class="kt-form-item lg:col-span-2">
                         <label class="kt-form-label">Alamat Lengkap</label>
-                        <textarea class="kt-input w-full min-h-[80px]" wire:model="address" rows="2"></textarea>
+                        <textarea class="kt-textarea w-full" wire:model="address" rows="2"></textarea>
                         @error('address') <div class="kt-form-message">{{ $message }}</div> @enderror
                     </div>
 

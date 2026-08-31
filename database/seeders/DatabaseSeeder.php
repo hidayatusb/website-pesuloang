@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(VillageUmkmSeeder::class);
         $this->call(VillageServiceSeeder::class);
         $this->call(VillageInfographicSeeder::class);
+        $this->call(VillageOfficialSeeder::class);
     }
 }

@@ -88,8 +88,40 @@
         </div>
     </section>
 
+    {{-- Aparatur Desa --}}
+    @if ($officials->isNotEmpty())
+        <section id="aparatur" class="bg-desa-900 py-20 lg:py-28">
+            <div class="mx-auto max-w-7xl px-4 lg:px-8">
+                <div class="mb-12 text-center">
+                    <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-desa-300">Pemerintahan Desa</p>
+                    <h2 class="text-2xl font-bold text-white lg:text-3xl">Aparatur {{ $identity->name }}</h2>
+                    <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-desa-100/80">
+                        Perangkat desa yang siap melayani kebutuhan administrasi dan pembangunan desa.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4 lg:gap-8">
+                    @foreach ($officials as $official)
+                        <div class="group overflow-hidden rounded-2xl bg-white/5 ring-1 ring-white/10 backdrop-blur transition hover:bg-white/10 hover:ring-desa-400/40">
+                            <div class="overflow-hidden">
+                                <img src="{{ $official->photoUrl() }}" alt="{{ $official->name }}" loading="lazy"
+                                    class="aspect-square w-full object-cover transition duration-300 group-hover:scale-105" />
+                            </div>
+                            <div class="p-4 text-center lg:p-5">
+                                <h3 class="text-sm font-bold leading-snug text-white lg:text-base">{{ $official->name }}</h3>
+                                <p class="mt-1 text-xs font-medium uppercase tracking-wide text-desa-300 lg:text-sm">
+                                    {{ $official->position }}
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
     {{-- Informasi Terkini --}}
-    <section id="informasi" class="bg-gray-50 ">
+    <section id="informasi" class="bg-gray-50 mt-10">
         <div class="mx-auto max-w-7xl px-4 lg:px-8">
             <div class="mb-10 flex flex-wrap items-end justify-between gap-4">
                 <div>
@@ -138,7 +170,7 @@
     </section>
 
     {{-- UMKM Desa --}}
-    <section id="umkm" class="mx-auto max-w-7xl px-4 py-20 lg:px-8 lg:py-28">
+    <section id="umkm" class="mx-auto max-w-7xl px-4 py-20 lg:px-8 ">
         <div class="mb-10 flex flex-wrap items-end justify-between gap-4">
             <div>
                 <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-desa-600">Ekonomi Desa</p>
@@ -179,7 +211,7 @@
     </section>
 
     {{-- Layanan Desa --}}
-    <section id="layanan" class="mx-auto max-w-7xl px-4 py-20 lg:px-8 lg:py-28">
+    <section id="layanan" class="mx-auto max-w-7xl px-4 lg:px-8 mb-10">
         <p class="mb-2 text-center text-sm font-semibold uppercase tracking-wide text-desa-600 lg:text-left">Layanan Desa</p>
         <h2 class="mb-10 text-center text-2xl font-bold text-gray-900 lg:text-left lg:text-3xl">Layanan Publik {{ $identity->name }}</h2>
 

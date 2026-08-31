@@ -6,7 +6,10 @@ use App\Http\Controllers\Admin\VillageServiceController;
 use App\Http\Controllers\Admin\VillageUmkmController;
 use App\Http\Controllers\Admin\VillageDocumentController;
 use App\Http\Controllers\Admin\VillageInfographicController;
+use App\Http\Controllers\Admin\VillageGalleryController;
+use App\Http\Controllers\Admin\VillageOfficialController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfographicController;
 use App\Http\Controllers\PostController;
@@ -27,6 +30,7 @@ Route::get('/umkm/{slug}', [UmkmController::class, 'show'])->name('umkm.show');
 Route::get('/layanan', [ServiceController::class, 'index'])->name('layanan.index');
 Route::get('/infografis', [InfographicController::class, 'index'])->name('infografis.index');
 Route::get('/dokumen', [DocumentController::class, 'index'])->name('dokumen.index');
+Route::get('/galeri', [GalleryController::class, 'index'])->name('galeri.index');
 Route::get('/layanan/{slug}', [ServiceController::class, 'show'])->name('layanan.show');
 
 Route::middleware(['auth'])->group(function () {
@@ -58,6 +62,16 @@ Route::middleware(['auth'])->group(function () {
     Route::livewire('/dashboard/desa/dokumen/{document}/edit', 'pages::desa.dokumen.form')->name('desa.dokumen.edit');
     Route::patch('/dashboard/desa/dokumen/{document}/toggle', [VillageDocumentController::class, 'toggle'])->name('desa.dokumen.toggle');
     Route::delete('/dashboard/desa/dokumen/{document}', [VillageDocumentController::class, 'destroy'])->name('desa.dokumen.destroy');
+    Route::livewire('/dashboard/desa/galeri', 'pages::desa.galeri.index')->name('desa.galeri.index');
+    Route::livewire('/dashboard/desa/galeri/tambah', 'pages::desa.galeri.form')->name('desa.galeri.create');
+    Route::livewire('/dashboard/desa/galeri/{gallery}/edit', 'pages::desa.galeri.form')->name('desa.galeri.edit');
+    Route::patch('/dashboard/desa/galeri/{gallery}/toggle', [VillageGalleryController::class, 'toggle'])->name('desa.galeri.toggle');
+    Route::delete('/dashboard/desa/galeri/{gallery}', [VillageGalleryController::class, 'destroy'])->name('desa.galeri.destroy');
+    Route::livewire('/dashboard/desa/aparatur', 'pages::desa.aparatur.index')->name('desa.aparatur.index');
+    Route::livewire('/dashboard/desa/aparatur/tambah', 'pages::desa.aparatur.form')->name('desa.aparatur.create');
+    Route::livewire('/dashboard/desa/aparatur/{official}/edit', 'pages::desa.aparatur.form')->name('desa.aparatur.edit');
+    Route::patch('/dashboard/desa/aparatur/{official}/toggle', [VillageOfficialController::class, 'toggle'])->name('desa.aparatur.toggle');
+    Route::delete('/dashboard/desa/aparatur/{official}', [VillageOfficialController::class, 'destroy'])->name('desa.aparatur.destroy');
 });
 
 Route::middleware(['guest'])->group(function () {

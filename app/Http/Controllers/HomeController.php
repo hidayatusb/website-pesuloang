@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\VillageIdentity;
+use App\Models\VillageOfficial;
 use App\Models\VillagePost;
 use App\Models\VillageService;
 use App\Models\VillageStatisticCategory;
@@ -18,6 +19,7 @@ class HomeController extends Controller
             'latestPosts' => VillagePost::query()->with('author')->latestPublished()->limit(3)->get(),
             'featuredUmkms' => VillageUmkm::query()->featured()->limit(3)->get(),
             'featuredServices' => VillageService::query()->featured()->limit(4)->get(),
+            'officials' => VillageOfficial::query()->active()->get(),
         ]);
     }
 }

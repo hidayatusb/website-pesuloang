@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\VillageDocument;
+use App\Models\VillageOfficial;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 
@@ -8,10 +8,9 @@ new #[Layout('layouts::demo1.base')] class extends Component {
     public function with(): array
     {
         return [
-            'documents' => VillageDocument::query()
+            'officials' => VillageOfficial::query()
                 ->orderBy('sort_order')
-                ->orderByDesc('published_at')
-                ->orderByDesc('created_at')
+                ->orderBy('name')
                 ->get(),
         ];
     }
@@ -22,19 +21,19 @@ new #[Layout('layouts::demo1.base')] class extends Component {
     <div class="kt-container-fixed">
         <div class="flex flex-wrap items-center justify-between gap-5 pb-7.5 lg:items-end">
             <div class="flex flex-col justify-center gap-2">
-                <h1 class="text-xl font-medium leading-none text-mono">Dokumen Desa</h1>
+                <h1 class="text-xl font-medium leading-none text-mono">Aparatur Desa</h1>
                 <p class="text-sm font-normal text-secondary-foreground">
-                    Kelola dokumen yang bisa diunduh warga dari website
+                    Kelola profil perangkat desa yang tampil di website
                 </p>
             </div>
             <div class="flex flex-wrap gap-2">
-                <a href="{{ route('dokumen.index') }}" target="_blank" class="kt-btn kt-btn-outline">
+                <a href="{{ route('home') }}#aparatur" target="_blank" class="kt-btn kt-btn-outline">
                     <i class="ki-filled ki-eye"></i>
                     Lihat di Website
                 </a>
-                <a href="{{ route('desa.dokumen.create') }}" class="kt-btn kt-btn-primary" wire:navigate>
+                <a href="{{ route('desa.aparatur.create') }}" class="kt-btn kt-btn-primary" wire:navigate>
                     <i class="ki-filled ki-plus"></i>
-                    Tambah Dokumen
+                    Tambah Aparatur
                 </a>
             </div>
         </div>
@@ -43,37 +42,31 @@ new #[Layout('layouts::demo1.base')] class extends Component {
     <div class="kt-container-fixed">
         <div class="kt-card">
             <div class="kt-card-header flex-wrap gap-3">
-                <h3 class="kt-card-title mt-3">Daftar Dokumen</h3>
-                <input type="text" placeholder="Cari judul dokumen..." class="kt-input sm:w-48 mb-3"
-                    data-kt-datatable-search="#dokumen_datatable" />
+                <h3 class="kt-card-title mt-3">Daftar Aparatur</h3>
+                <input type="text" placeholder="Cari nama atau jabatan..." class="kt-input sm:w-48 mb-3"
+                    data-kt-datatable-search="#aparatur_datatable" />
             </div>
 
-            <div id="dokumen_datatable" class="kt-card-table" data-kt-datatable="true" data-kt-datatable-page-size="10">
+            <div id="aparatur_datatable" class="kt-card-table" data-kt-datatable="true" data-kt-datatable-page-size="10">
                 <div class="kt-table-wrapper kt-scrollable max-w-full overflow-auto">
-                    <table class="kt-table kt-table-border min-w-[860px]" data-kt-datatable-table="true">
+                    <table class="kt-table kt-table-border min-w-[720px]" data-kt-datatable-table="true">
                         <thead>
                             <tr>
-                                <th scope="col" class="min-w-[280px]" data-kt-datatable-column="title">
+                                <th scope="col" class="min-w-[240px]" data-kt-datatable-column="name">
                                     <span class="kt-table-col">
-                                        <span class="kt-table-col-label">Judul</span>
+                                        <span class="kt-table-col-label">Nama</span>
                                         <span class="kt-table-col-sort"></span>
                                     </span>
                                 </th>
-                                <th scope="col" class="w-[90px]" data-kt-datatable-column="type">
+                                <th scope="col" class="min-w-[180px]" data-kt-datatable-column="position">
                                     <span class="kt-table-col">
-                                        <span class="kt-table-col-label">Jenis</span>
+                                        <span class="kt-table-col-label">Jabatan</span>
                                         <span class="kt-table-col-sort"></span>
                                     </span>
                                 </th>
-                                <th scope="col" class="w-[100px]" data-kt-datatable-column="size">
+                                <th scope="col" class="w-[80px]" data-kt-datatable-column="order">
                                     <span class="kt-table-col">
-                                        <span class="kt-table-col-label">Ukuran</span>
-                                        <span class="kt-table-col-sort"></span>
-                                    </span>
-                                </th>
-                                <th scope="col" class="min-w-[130px]" data-kt-datatable-column="date">
-                                    <span class="kt-table-col">
-                                        <span class="kt-table-col-label">Tanggal</span>
+                                        <span class="kt-table-col-label">Urutan</span>
                                         <span class="kt-table-col-sort"></span>
                                     </span>
                                 </th>
@@ -88,40 +81,35 @@ new #[Layout('layouts::demo1.base')] class extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($documents as $document)
-                                <tr wire:key="dokumen-{{ $document->id }}">
+                            @forelse ($officials as $official)
+                                <tr wire:key="aparatur-{{ $official->id }}">
                                     <td>
-                                        <p class="font-medium text-foreground">{{ $document->title }}</p>
+                                        <div class="flex items-center gap-3">
+                                            <img src="{{ $official->photoUrl() }}" alt="{{ $official->name }}"
+                                                class="size-10 rounded-full object-cover" />
+                                            <p class="font-medium text-foreground">{{ $official->name }}</p>
+                                        </div>
                                     </td>
+                                    <td class="text-muted-foreground">{{ $official->position }}</td>
+                                    <td class="text-muted-foreground">{{ $official->sort_order }}</td>
                                     <td>
-                                        <span class="kt-badge kt-badge-sm {{ $document->fileExtension() === 'pdf' ? 'kt-badge-destructive' : 'kt-badge-info' }} kt-badge-outline">
-                                            {{ $document->fileTypeLabel() }}
-                                        </span>
-                                    </td>
-                                    <td class="text-muted-foreground">{{ $document->formattedSize() }}</td>
-                                    <td class="text-muted-foreground">{{ $document->formattedDate() }}</td>
-                                    <td>
-                                        <form method="POST" action="{{ route('desa.dokumen.toggle', $document) }}" class="inline">
+                                        <form method="POST" action="{{ route('desa.aparatur.toggle', $official) }}" class="inline">
                                             @csrf
                                             @method('PATCH')
                                             <button type="submit"
-                                                class="kt-badge kt-badge-sm {{ $document->is_published ? 'kt-badge-success' : 'kt-badge-secondary' }} kt-badge-outline cursor-pointer">
-                                                {{ $document->is_published ? 'Publikasi' : 'Draft' }}
+                                                class="kt-badge kt-badge-sm {{ $official->is_active ? 'kt-badge-success' : 'kt-badge-secondary' }} kt-badge-outline cursor-pointer">
+                                                {{ $official->is_active ? 'Aktif' : 'Nonaktif' }}
                                             </button>
                                         </form>
                                     </td>
                                     <td class="text-end">
                                         <div class="flex justify-end gap-1">
-                                            <a href="{{ $document->fileUrl() }}" target="_blank"
-                                                class="kt-btn kt-btn-sm kt-btn-icon kt-btn-ghost" title="Lihat / Unduh">
-                                                <i class="ki-filled ki-file-down"></i>
-                                            </a>
-                                            <a href="{{ route('desa.dokumen.edit', $document) }}"
+                                            <a href="{{ route('desa.aparatur.edit', $official) }}"
                                                 class="kt-btn kt-btn-sm kt-btn-icon kt-btn-ghost" wire:navigate title="Edit">
                                                 <i class="ki-filled ki-notepad-edit"></i>
                                             </a>
-                                            <form method="POST" action="{{ route('desa.dokumen.destroy', $document) }}" class="inline"
-                                                onsubmit="return confirm('Yakin ingin menghapus dokumen ini?')">
+                                            <form method="POST" action="{{ route('desa.aparatur.destroy', $official) }}" class="inline"
+                                                onsubmit="return confirm('Yakin ingin menghapus aparatur ini?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="kt-btn kt-btn-sm kt-btn-icon kt-btn-ghost text-red-500" title="Hapus">
@@ -133,8 +121,8 @@ new #[Layout('layouts::demo1.base')] class extends Component {
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="py-10 text-center text-muted-foreground">
-                                        Belum ada dokumen.
+                                    <td colspan="5" class="py-10 text-center text-muted-foreground">
+                                        Belum ada data aparatur desa.
                                     </td>
                                 </tr>
                             @endforelse
