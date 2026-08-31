@@ -27,7 +27,10 @@
                 class="text-sm font-medium transition {{ $isHome ? 'border-b-2 border-desa-600 pb-0.5 text-desa-600' : 'text-gray-600 hover:text-desa-600' }}">
                 Beranda
             </a>
-          
+            <a href="{{ route('berita.index') }}"
+                class="text-sm font-medium transition {{ $isBerita ? 'border-b-2 border-desa-600 pb-0.5 text-desa-600' : 'text-gray-600 hover:text-desa-600' }}">
+                Berita
+            </a>
             <a href="{{ route('statistika.index') }}"
                 class="text-sm font-medium transition {{ $isStatistika ? 'border-b-2 border-desa-600 pb-0.5 text-desa-600' : 'text-gray-600 hover:text-desa-600' }}">
                 Statistika
@@ -74,7 +77,10 @@
                 class="rounded-lg px-3 py-2 text-sm font-medium {{ $isHome ? 'bg-desa-50 text-desa-600' : 'text-gray-600 hover:bg-gray-50' }}">
                 Beranda
             </a>
-         
+            <a href="{{ route('berita.index') }}"
+                class="rounded-lg px-3 py-2 text-sm {{ $isBerita ? 'bg-desa-50 font-medium text-desa-600' : 'text-gray-600 hover:bg-gray-50' }}">
+                Berita
+            </a>
             <a href="{{ route('statistika.index') }}"
                 class="rounded-lg px-3 py-2 text-sm {{ $isStatistika ? 'bg-desa-50 font-medium text-desa-600' : 'text-gray-600 hover:bg-gray-50' }}">
                 Statistika
