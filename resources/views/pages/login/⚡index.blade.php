@@ -62,7 +62,7 @@ new #[Layout('layouts::login')] class extends Component {
         <div class="kt-form-item">
             <label class="kt-form-label" for="email">Email</label>
             <div class="kt-input">
-                <input id="email" type="email" class="kt-input" placeholder="admin@desasukamaju.go.id"
+                <input id="email" type="email" class="kt-input" placeholder="admin@desapesuloang.com"
                     wire:model="email" autocomplete="email" />
             </div>
             @error('email')
