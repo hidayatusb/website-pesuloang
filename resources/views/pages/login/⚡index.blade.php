@@ -49,7 +49,7 @@ new #[Layout('layouts::login')] class extends Component {
                 Masuk Admin
             </h3>
             <p class="text-sm text-secondary-foreground">
-                Panel Admin Website Desa Sukamaju
+                Panel Admin Website Desa Pesuloang
             </p>
         </div>
 
